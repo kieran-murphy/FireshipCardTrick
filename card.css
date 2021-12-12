@@ -12,6 +12,12 @@ a {
     text-decoration: none;
 }
 
+#scrollableContent {
+    height: 100%;
+    margin: 0em;
+    overflow-y: auto;
+ }
+
 .card-list {
     display: flex;
     padding: 3rem;

@@ -3,25 +3,37 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Cards</title>
+    <title>Cocktails</title>
     <link rel="stylesheet" href="card.css" />
+    <link rel="icon" type="image/x-icon" href="/images/favicon.ico?">
   </head>
   <body>
  <section class="card-list">
       <article class="card">
         <header class="card-header">
           <p>Sep 11th 2020</p>
-          <h2>Never forget</h2>
+          <h2><span id="name"></span></h2>
         </header>
+        <div id="scrollableContent">
+          <p><span id="ingOne"></span></p>
+          <p><span id="ingTwo"></span></p>
+          <p><span id="ingThree"></span></p>
+          <p><span id="ingFour"></span></p>
+          <p><span id="ingFive"></span></p>
+          <p><span id="ingSix"></span></p>
+          <p><span id="ingSeven"></span></p>
+          <span id="instructions"></span>
+        </div>
+        
 
         <div class="card-author">
           <a class="author-avatar" href="#">
-            <img src="avatar.png" />
+            <img id="drinkImg" />
           </a>
           <svg class="half-circle" viewBox="0 0 106 57">
             <path d="M102 4c0 27.1-21.9 49-49 49S4 31.1 4 4"></path>
           </svg>
-
+          
           <div class="author-name">
             <div class="author-name-prefix">Author</div>
             Jeff Delaney
@@ -193,5 +205,41 @@
 
 
  </section>
+ <script>
+  const api_url = "https://www.thecocktaildb.com/api/json/v1/1/random.php";
+  async function getISS() {
+      const response = await fetch(api_url);
+      const data = await response.json();
+      
+      const drinkImg = data.drinks[0].strDrinkThumb;
+      const drinkName = data.drinks[0].strDrink;
+      const instructions = data.drinks[0].strInstructions;
+      const ingOne = data.drinks[0].strIngredient1;
+      const ingTwo = data.drinks[0].strIngredient2;
+      const ingThree = data.drinks[0].strIngredient3;
+      const ingFour = data.drinks[0].strIngredient4;
+      const ingFive = data.drinks[0].strIngredient5;
+      const ingSix = data.drinks[0].strIngredient6;
+      const ingSeven = data.drinks[0].strIngredient7;
+
+      
+      document.getElementById('drinkImg').src = drinkImg;
+      document.getElementById('name').textContent = drinkName;
+      document.getElementById('instructions').textContent = instructions;
+      document.getElementById('ingOne').textContent = ingOne;
+      document.getElementById('ingTwo').textContent = ingTwo;
+      document.getElementById('ingThree').textContent = ingThree;
+      document.getElementById('ingFour').textContent = ingFour;
+      document.getElementById('ingFive').textContent = ingFive;
+      document.getElementById('ingSix').textContent = ingSix;
+      document.getElementById('ingSeven').textContent = ingSeven;
+      
+  }
+  
+  getISS();
+
+  
+  
+</script>
   </body>
 </html>
